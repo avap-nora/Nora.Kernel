@@ -1,8 +1,8 @@
 {
-    "name": "nora/kernel",
+    "name": "avap/nora-php-kernel",
     "description": "",
-    "type": "project",
-    "license": "proprietary",
+    "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Hajime MATSUMOTO",
