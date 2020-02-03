@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<phpdox xmlns="http://xml.phpdox.net/config" silent="false">
+    <bootstrap/>
+    <!-- <project name="phpdox" source="${basedir}/lib/Nora" workdir="${basedir}/build/docs/xml"> -->
+        <project name="phpdox" source="${basedir}/src" workdir="${basedir}/var/log/docs/xml">
+        <collector publiconly="false" backend="parser" encoding="auto">
+            <include mask="*.php"/>
+            <exclude mask=""/>
+            <inheritance resolve="true">
+            </inheritance>
+        </collector>
+
+        <generator output="${basedir}/build/dev/phpdox">
+            <enrich base="${basedir}/var/log">
+                <source type="build" />
+                <source type="phploc" />
+                <source type="git">
+                    <git binary="/usr/bin/git" />
+                    <history enabled="true" limit="15" cache="${phpDox.project.workdir}/gitlog.xml" />
+                </source>
+                <source type="phpcs">
+                    <file name="phpcs.xml" />
+                </source>
+                <source type="pmd">
+                    <file name="pmd.xml" />
+                </source>
+                <source type="phpunit"> 
+                    <coverage path="coverage/xml" />
+                    <!-- <filter directory="${phpDox.project.source}" /> -->
+                </source>
+            </enrich>
+            <build engine="html" enabled="true" output="html">
+                <template dir="${phpDox.home}/templates/html"/>
+                <file extension="xhtml"/>
+            </build>
+        </generator>
+    </project>
+
+</phpdox>
