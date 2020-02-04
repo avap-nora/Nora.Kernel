@@ -13,8 +13,7 @@ class KernelTest extends TestCase
     public function カーネルの呼び出し()
     {
         $kernel = (new Bootstrap)('NoraKernelFake', 'app-test');
-        //
-        // $this->assertInstanceOf(Kernel::class, $kernel);
-        // return $kernel;
+        $this->assertInstanceOf(\NoraKernelFake\Kernel::class, $kernel);
+        return $kernel;
     }
 }
