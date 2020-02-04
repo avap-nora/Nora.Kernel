@@ -50,7 +50,11 @@ class KernelInjector implements InjectorInterface
         $this->meta = $meta;
         $this->scriptDir = $meta->tmpDir . '/di';
         $this->classDir = (new CreateWritableDirectory)($meta->tmpDir . '/class');
+
         $this->container = (new CreateKernel)($meta)->getContainer();
+        // Bind
+        (new Bind($this->getContainer(), InjectorInterface::class))->toInstance($this);
+
         $this->container->weaveAspects(new Compiler($this->classDir));
     }
 

@@ -50,10 +50,6 @@ class CreateKernel
         }
 
         $module->override(new KernelModule($meta));
-
-        // Bind
-        (new Bind($module->getContainer(), InjectorInterface::class))->toInstance($this);
-
         $this->module = $module;
         return $module;
     }
