@@ -53,7 +53,7 @@ class KernelInjector implements InjectorInterface
 
         $this->container = (new CreateKernel)($meta)->getContainer();
         // Bind
-        (new Bind($this->getContainer(), InjectorInterface::class))->toInstance($this);
+        (new Bind($this->container, InjectorInterface::class))->toInstance($this);
 
         $this->container->weaveAspects(new Compiler($this->classDir));
     }
