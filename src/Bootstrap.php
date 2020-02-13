@@ -16,12 +16,18 @@ class Bootstrap
         string $name,
         string $context = 'app',
         string $directory = null,
-        string $cacheNamespace = ''
+        string $cacheNamespace = '',
+        string $tmpDirectory = null,
+        string $logDirectory = null
     ) : KernelInterface {
         $directory = $directory ?? $this->getDirectory($name);
         $meta = new KernelMeta($name, $context, $directory);
-        $meta->tmpDir = (new CreateWritableDirectory)($directory, '/var/tmp/', $context);
-        $meta->logDir = (new CreateWritableDirectory)($directory, '/var/log/', $context);
+        $meta->tmpDir = (new CreateWritableDirectory)(
+            ($tmpDirectory ?? ($directory.'/var/tmp/'.$context))
+        );
+        $meta->logDir = (new CreateWritableDirectory)(
+            ($logDirectory ?? ($directory.'/var/log/'.$context))
+        );
         $injector = new KernelInjector($meta);
         $kernelId = $meta->name . ucwords($context) . $cacheNamespace;
         $kernel = $injector->getInstance(KernelInterface::class);
