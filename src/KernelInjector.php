@@ -42,6 +42,7 @@ class KernelInjector implements InjectorInterface
      */
     public $loadedContexts;
 
+    public $container;
     /**
      * Setup Kernel Injector
      */
@@ -83,5 +84,10 @@ class KernelInjector implements InjectorInterface
         //         $bound
         //     )->getInstance($class, Name::ANY);
         // }
+    }
+
+    public function getContainer()
+    {
+        return $this->container;
     }
 }
